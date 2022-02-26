@@ -1,12 +1,13 @@
 from flask import Flask, jsonify
-from model import getDateMatrix
+
 from exceptions import InvalidDateFormat
+from model import getDateMatrix
 
 app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
-def home(date: str):  # Format: "YYYY-MM-DD"
+def home(date: str) -> jsonify:  # Format: "YYYY-MM-DD"
     """ Home route of the flask application
     Parameters:
         date: str
