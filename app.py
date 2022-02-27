@@ -1,6 +1,7 @@
+import json
 import logging
 
-from flask import Flask, jsonify
+from flask import Flask
 
 from exceptions import InvalidDateFormat
 from model import getDateMatrix
@@ -15,7 +16,7 @@ def home():
 
 
 @app.route("/<date>", methods=["GET"])
-def date(date: str) -> jsonify:  # Format: "YYYY-MM-DD"
+def date(date: str) -> json:  # Format: "YYYY-MM-DD"
     """ Home route of the flask application
     Parameters:
         date: str
@@ -27,14 +28,14 @@ def date(date: str) -> jsonify:  # Format: "YYYY-MM-DD"
     logger.info(f"GET call received to get date for: {date}")
     try:
         dateMatrix = getDateMatrix(date)
-        return jsonify(dateMatrix), 200
+        return json.dumps(dateMatrix), 200
     except InvalidDateFormat as e:
         logger.info("Date validation failed", exc_info=True)
-        return jsonify(str(e)), 400
+        return str(e), 400
     except:
         logger.exception(
             "Server side error. Please reach out to support team for help")
-        return jsonify("Server side issue"), 500
+        return "Server side issue", 500
 
 
 if __name__ == "__main__":
