@@ -1,16 +1,14 @@
 from enum import Enum
 
-from utils import Date
-
 
 class DAY(Enum):
+    SUNDAY = 0
     MONDAY = 1
     TUESDAY = 2
     WEDNESDAY = 3
     THURSDAY = 4
     FRIDAY = 5
     SATURDAY = 6
-    SUNDAY = 7
 
 
 class MONTH(Enum):
@@ -28,10 +26,38 @@ class MONTH(Enum):
     DECEMBER = 12
 
 
+class Date:
+    def __init__(self, date: str) -> None:
+        self._date = date
+        year, month, day = map(int, date.split("-"))
+        self._year = year
+        self._month = MONTH._value2member_map_[month]
+        self._day = day
+
+    @property
+    def year(self) -> int:
+        return self._year
+
+    @property
+    def month(self) -> MONTH:
+        return self._month
+
+    @property
+    def day(self) -> int:
+        return self._day
+
+    @day.setter
+    def day(self, day) -> int:
+        self._day = day
+
+    def __str__(self):
+        return self._date
+
+
 # The Britain and the British Empire including the American colonies adopted the Gregorina Calendar on 13-Sept-1752
-# We are following the Gregorian Calendar and henceminimum supported date is 14-Sept-1752
-PIVOT_DATE = Date("1752-09-14")
-PIVOT_DAY = DAY.THURSDAY
+# We are following the Gregorian Calendar and hence minimum supported date is 01-Oct-1752
+PIVOT_DATE = Date("1752-10-01")
+PIVOT_DAY = DAY.SUNDAY
 
 MONTHS_WITH_31_DAYS = {
     MONTH.JANUARY,
