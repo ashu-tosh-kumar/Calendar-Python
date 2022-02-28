@@ -1,6 +1,6 @@
 # Calendar
 
-This project aims to use Python as a back-end and plain JavaScript as front end to build a sample Calendar application. We aim not to use any external library for any purpose except very native standard libraries like `logging` in Python etc.
+This project aims to use Python as a back-end to build a sample Calendar application. We aim not to use any external library for any purpose except very native standard libraries like `logging` in Python etc.
 
 The application accepts a date string in `YYYY-MM-DD` format and returns a calendar for that month filled with previous and/or next month dates to fulfill a `7x6` matrix.
 
@@ -20,9 +20,8 @@ Tech Stack
 
 1. Python for back-end
 2. Flask for web app
-3. JavaScript for front-end
 
 Some features of the project:
 
 1. The above date matrix is `7x6`
-2. 100% unit test coverage for both Python and JavaScript code
+2. 100% unit test coverage for both Python

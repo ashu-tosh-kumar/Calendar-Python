@@ -7,6 +7,14 @@ logger = logging.getLogger(__name__)
 
 
 def isLeapYear(year: int) -> bool:
+    """ Checks whetehr a year is leap year or not
+    Parameters:
+        year: int
+            Year that needs to be checked
+    Returns:
+        isLeapYear: bool
+            Boolean flag as `True` if given `year` is a leap year else `False`
+    """
     logger.debug(f"Checking year: {year} for leap year")
 
     isLeapYear = False
@@ -26,6 +34,17 @@ def isLeapYear(year: int) -> bool:
 
 
 def countLeapYears(date: Date) -> int:
+    """ Count number of leap years passed until given `date`
+
+    if takes current year into consideration if `date` is beyond month of February else not
+
+    Parameters:
+        date: Date
+            Date untl which we need to calculate no. of leap years
+    Returns:
+        numLeapYearsUntilDate: int
+            No. of leap years passed until the `date`
+    """
     logger.debug(f"Counting no. of leap years until date: {date}")
     numLeapYearsUntilDate = 0
     year = date.year
@@ -43,7 +62,14 @@ def countLeapYears(date: Date) -> int:
 
 
 def getDefaultDaysInMonth(month: MONTH) -> int:
-    # Doesn't consider leap year
+    """ Returns no. of default days in a month without considering a leap year
+    Parameters:
+        month: MONTH
+            Date for which calendar is required
+    Returns:
+        numDays : int
+            No. of days in given month `month`
+    """
     if month in MONTHS_WITH_31_DAYS:
         return 31
     elif month is MONTH.FEBRUARY:
@@ -53,7 +79,17 @@ def getDefaultDaysInMonth(month: MONTH) -> int:
 
 
 def getActualDaysInMonth(month: MONTH, year: int) -> int:
-    # Doesn't consider leap year
+    """ Returns no. of default days in a month with considering a leap year
+
+    Makes use of `getDefaultDaysInMonth`
+
+    Parameters:
+        month: MONTH
+            Date for which calendar is required
+    Returns:
+        numDays : int
+            No. of days in given month `month`
+    """
     if month is MONTH.FEBRUARY:
         if isLeapYear(year):
             return 29
@@ -64,9 +100,34 @@ def getActualDaysInMonth(month: MONTH, year: int) -> int:
 
 
 def numDaysBetweenDates(baseDate: Date, actualDate: Date) -> int:
+    """ Returns difference of days between two dates
+
+    Makes use of `getDefaultDaysInMonth`, `countLeapYears`
+
+    Parameters:
+        baseDate: Date
+            Base date from which difference needs to be calculated
+
+        actualDate: Date
+            Actual date upto which difference needs to be calculated
+    Returns:
+        numDays : int
+            Difference of days between `totalDaysActualDate` `totalDaysBaseDate`
+    """
     logger.debug(f"Counting diff of days between: {baseDate} and {actualDate}")
 
-    def calculateAbsoluteDays(date: Date):
+    def calculateAbsoluteDays(date: Date) -> int:
+        """ Returns no. of absolute days since begining until `date`
+
+        Makes use of `getDefaultDaysInMonth`, `countLeapYears`
+
+        Parameters:
+            date: Date
+                Date for which absolute no. of days needs to be calculated
+        Returns:
+            numDays : int
+                No. of days since begining until `date`
+        """
         totalDays = date.year * 365 + date.day
         for i in range(1, date.month.value):
             totalDays += getDefaultDaysInMonth(MONTH._value2member_map_[i])
@@ -83,6 +144,18 @@ def numDaysBetweenDates(baseDate: Date, actualDate: Date) -> int:
 
 
 def dateValidator(date: str, pivotDate: Date) -> None:
+    """ Validates a string date to be accepted by the application
+
+    Parameters:
+        date: str
+            Date that needs to be validated
+
+        pivotDate: Date
+            Minimum possible date supported by the application
+    Raises:
+        InvalidDateFormat
+            If the passed `date` fails the validations test(s)
+    """
     logger.info(f"Validaing date: {date}")
     try:
         year, month, day = date.split("-")
@@ -95,8 +168,10 @@ def dateValidator(date: str, pivotDate: Date) -> None:
     try:
         year, month, day = float(year), float(month), float(day)
     except:
-        logger.info(f"Year and/or month and/or day of date: {date} is/are not numbers")
-        raise InvalidDateFormat(f"String {date} contains non-numeric values for year and/or month and/or day")
+        logger.info(
+            f"Year and/or month and/or day of date: {date} is/are not numbers")
+        raise InvalidDateFormat(
+            f"String {date} contains non-numeric values for year and/or month and/or day")
 
     if int(year) != year or int(month) != month or int(day) != day:
         logger.info(

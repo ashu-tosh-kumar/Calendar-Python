@@ -12,14 +12,15 @@ def getDateMatrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
         date: str
             Date for which calendar is required
     Returns:
-            Returns the tuple of json response and status code
+        dateMatrix: list[list]
+            Returns a list of list representing 7*6 calendar for the month as per `date`
     """
     logger.info(f"Computing date matrix for: {date}")
 
-    # Validation on date
+    # Validation on date passed by user
     dateValidator(date, PIVOT_DATE)
 
-    dateObj = Date(date)  # Convert into application specific date format
+    dateObj = Date(date)  # Convert into application specific Date object
     dateObj.day = 1
     diffDaysFromPivotDate = numDaysBetweenDates(PIVOT_DATE, dateObj)
     currDay = DAY._value2member_map_[
