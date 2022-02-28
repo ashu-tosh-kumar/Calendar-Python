@@ -28,14 +28,14 @@ def isLeapYear(year: int) -> bool:
 def countLeapYears(date: Date) -> int:
     logger.debug(f"Counting no. of leap years until date: {date}")
     numLeapYearsUntilDate = 0
-    years = date.year
+    year = date.year
 
     if date.month.value <= 2:
-        years -= 1
+        year -= 1
 
-    numLeapYearsUntilDate = years // 4
-    numLeapYearsUntilDate -= years // 100
-    numLeapYearsUntilDate += years // 400
+    numLeapYearsUntilDate = year // 4
+    numLeapYearsUntilDate -= year // 100
+    numLeapYearsUntilDate += year // 400
 
     logger.debug(
         f"No. of leap years until date: {date}: {numLeapYearsUntilDate}")
@@ -85,12 +85,18 @@ def numDaysBetweenDates(baseDate: Date, actualDate: Date) -> int:
 def dateValidator(date: str, pivotDate: Date) -> None:
     logger.info(f"Validaing date: {date}")
     try:
-        year, month, day = map(int, date.split("-"))
+        year, month, day = date.split("-")
     except:
         logger.info(
             f"Failed to fetch year, month and/or day information from string: {date}")
         raise InvalidDateFormat(
             f"String {date} doesn't contain enough separators to specify year, month and day")
+
+    try:
+        year, month, day = float(year), float(month), float(day)
+    except:
+        logger.info(f"Year and/or month and/or day of date: {date} is/are not numbers")
+        raise InvalidDateFormat(f"String {date} contains non-numeric values for year and/or month and/or day")
 
     if int(year) != year or int(month) != month or int(day) != day:
         logger.info(
