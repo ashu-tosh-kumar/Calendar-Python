@@ -36,7 +36,6 @@ class Date:
             date: str
                 Date ("YYYY-MM-DD") that needs to be represented as a `Date` object
         """
-        self._date = date
         year, month, day = map(int, date.split("-"))
         self._year = year
         self._month = MONTH._value2member_map_[month]
@@ -84,7 +83,7 @@ class Date:
             _date: str
                 String representation of `Date` object
         """
-        return self._date
+        return f"{self.year}-{self.month.value}-{self.day}"
 
 
 # The Britain and the British Empire including the American colonies adopted the Gregorina Calendar on 13-Sept-1752

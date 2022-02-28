@@ -24,4 +24,4 @@ Tech Stack
 Some features of the project:
 
 1. The above date matrix is `7x6`
-2. 100% unit test coverage for both Python
+2. 100% unit test coverage
