@@ -19,7 +19,7 @@ For example, for the input `2022-01-31` , the calendar representation is below:
 ## Tech Stack
 
 1. Python for back-end
-2. Flask for web app
+2. Flask for web server
 
 ## Features
 
