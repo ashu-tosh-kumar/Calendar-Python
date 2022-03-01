@@ -21,7 +21,7 @@ class isLeapYearTest(unittest.TestCase):
 
         self.assertEqual(expectedValue, actualValue)
 
-    def test_isLeapYear_should_return_true_for_3000(self):
+    def test_isLeapYear_should_return_false_for_3000(self):
         expectedValue = False
 
         actualValue = isLeapYear(3000)
