@@ -43,7 +43,8 @@ def getDateMatrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
     # Fill the current month
     idx = 0
     jdx = currDay.value
-    for day in range(1, getActualDaysInMonth(dateObj.month, dateObj.year) + 1):
+    thisMonthDate = getActualDaysInMonth(dateObj.month, dateObj.year)
+    for day in range(1, thisMonthDate + 1):
         dateMatrix[idx][jdx] = day
         jdx += 1
         if jdx >= len(dateMatrix[0]):
