@@ -1,9 +1,7 @@
-from multiprocessing import dummy
 import unittest
-from unittest.mock import patch
-from exceptions import InvalidDateFormat
 
-from constants import PIVOT_DATE, Date, MONTH
+from constants import MONTH, PIVOT_DATE, Date
+from exceptions import InvalidDateFormat
 from utils import (countLeapYears, dateValidator, getActualDaysInMonth,
                    getDefaultDaysInMonth, isLeapYear, numDaysBetweenDates)
 
@@ -23,7 +21,7 @@ class isLeapYearTest(unittest.TestCase):
 
         self.assertEqual(expectedValue, actualValue)
 
-    def test_isLeapYear_should_return_true_for_3000(self):
+    def test_isLeapYear_should_return_false_for_3000(self):
         expectedValue = False
 
         actualValue = isLeapYear(3000)
