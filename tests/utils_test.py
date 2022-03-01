@@ -1,9 +1,7 @@
-from multiprocessing import dummy
 import unittest
-from unittest.mock import patch
-from exceptions import InvalidDateFormat
 
-from constants import PIVOT_DATE, Date, MONTH
+from constants import MONTH, PIVOT_DATE, Date
+from exceptions import InvalidDateFormat
 from utils import (countLeapYears, dateValidator, getActualDaysInMonth,
                    getDefaultDaysInMonth, isLeapYear, numDaysBetweenDates)
 
