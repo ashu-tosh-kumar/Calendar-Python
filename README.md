@@ -16,14 +16,30 @@ For example, for the input `2022-01-31` , the calendar representation is below:
     30      31      1       2       3       4        5
 ```
 
-Tech Stack
+## Tech Stack
 
 1. Python for back-end
 2. Flask for web app
 
-Some features of the project:
+## Features
 
 1. The above date matrix is `7x6`
 2. 100% unit test coverage
 
 JavaScript version of this project: [Calendar-JS](https://github.com/ashu-tosh-kumar/Calendar-JS)
+
+
+## Run Application
+1. Working directory required: `Calendar-Python`
+2. Run `python app.py`
+3. Hit the REST End point `localhost:8080/{YYYY-MM-DD}`
+
+## Run Tests
+1. Working directory required: `Calendar-Python`
+2. Run `python -m tests.{test-file-name-without-extension}`
+
+## Check coverage of individual test file
+1. Working directory required: `Calendar-Python`
+2. Run `coverage run -m tests.{test-file-name-without-extension}`
+3. Run `coverage html`
+4. Check the generated html file at location `htmlcov\index.html`
