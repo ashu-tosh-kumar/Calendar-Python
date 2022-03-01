@@ -65,7 +65,7 @@ def getDefaultDaysInMonth(month: MONTH) -> int:
     """ Returns no. of default days in a month without considering a leap year
     Parameters:
         month: MONTH
-            Date for which calendar is required
+            month for which actual days is required
     Returns:
         numDays : int
             No. of days in given month `month`
@@ -79,13 +79,15 @@ def getDefaultDaysInMonth(month: MONTH) -> int:
 
 
 def getActualDaysInMonth(month: MONTH, year: int) -> int:
-    """ Returns no. of default days in a month with considering a leap year
+    """ Returns no. of actual days in a month with considering a leap year
 
     Makes use of `getDefaultDaysInMonth`
 
     Parameters:
         month: MONTH
-            Date for which calendar is required
+            month for which actual days is required
+        year: int
+            Year in which no. of days is required for `month`
     Returns:
         numDays : int
             No. of days in given month `month`
