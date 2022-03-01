@@ -60,18 +60,18 @@ class getDateMatrixTest(unittest.TestCase):
     @patch("model.getActualDaysInMonth")
     @patch("model.numDaysBetweenDates")
     @patch("model.dateValidator")
-    def test_getDateMatrix_should_return_expected_date_matrix_for_leap_month(self, stubDateValidator, stubNumDaysBetweenDates, stubGetActualDaysInMonth):
-        dummyDate = "2020-02-28"
+    def test_getDateMatrix_should_return_expected_date_matrix_for_non_leap_month(self, stubDateValidator, stubNumDaysBetweenDates, stubGetActualDaysInMonth):
+        dummyDate = "2020-03-28"
         # The code in model.py makes date as 1, so this value wouldn't be the actual different between dummyDate and PIVOT_DATE
-        stubNumDaysBetweenDates.return_value = 97642
-        stubGetActualDaysInMonth.side_effect = [31, 29]
+        stubNumDaysBetweenDates.return_value = 97671
+        stubGetActualDaysInMonth.side_effect = [29, 31]
         expectedValue = [
-            [26, 27, 28, 29, 30, 31, 1],
-            [2, 3, 4, 5, 6, 7, 8],
-            [9, 10, 11, 12, 13, 14, 15],
-            [16, 17, 18, 19, 20, 21, 22],
-            [23, 24, 25, 26, 27, 28, 29],
-            [1, 2, 3, 4, 5, 6, 7]
+            [1, 2, 3, 4, 5, 6, 7],
+            [8, 9, 10, 11, 12, 13, 14],
+            [15, 16, 17, 18, 19, 20, 21],
+            [22, 23, 24, 25, 26, 27, 28],
+            [29, 30, 31, 1, 2, 3, 4],
+            [5, 6, 7, 8, 9, 10, 11]
         ]
 
         actualValue = getDateMatrix(dummyDate)

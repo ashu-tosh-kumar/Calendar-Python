@@ -35,7 +35,7 @@ class ConstantsTest(unittest.TestCase):
         dummyDate = "2022-02-28"
         dateObject = Date(dummyDate)
 
-        self.assertEqual(dummyDate, str(dateObject))
+        self.assertEqual(str(dateObject), "2022-2-28")
 
     def test_PIVOT_DATE(self):
         ExpectedDate = Date("1752-10-01")
