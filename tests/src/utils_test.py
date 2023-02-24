@@ -3,196 +3,196 @@ import unittest
 from src.constants import MONTH, PIVOT_DATE, Date
 from src.exceptions import InvalidDateFormat
 from src.utils import (
-    countLeapYears,
-    dateValidator,
-    getActualDaysInMonth,
-    getDefaultDaysInMonth,
-    isLeapYear,
-    numDaysBetweenDates,
+    count_leap_years,
+    date_validator,
+    get_actual_days_in_month,
+    get_default_days_in_month,
+    is_leap_year,
+    num_days_between_dates,
 )
 
 
-class isLeapYearTest(unittest.TestCase):
+class IsLeapYearTest(unittest.TestCase):
     def test_isLeapYear_should_return_true_for_2020(self):
-        expectedValue = True
+        expected_value = True
 
-        actualValue = isLeapYear(2020)
+        actual_value = is_leap_year(2020)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
     def test_isLeapYear_should_return_true_for_2000(self):
-        expectedValue = True
+        expected_value = True
 
-        actualValue = isLeapYear(2000)
+        actual_value = is_leap_year(2000)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
     def test_isLeapYear_should_return_false_for_3000(self):
-        expectedValue = False
+        expected_value = False
 
-        actualValue = isLeapYear(3000)
+        actual_value = is_leap_year(3000)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
     def test_isLeapYear_should_return_false_for_2021(self):
-        expectedValue = False
+        expected_value = False
 
-        actualValue = isLeapYear(2021)
+        actual_value = is_leap_year(2021)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
 
-class countLeapYearsTest(unittest.TestCase):
+class CountLeapYearsTest(unittest.TestCase):
     def test_countLeapYears_should_return_expected_value(self):
-        dummyDate = Date("2022-02-28")
-        expectedValue = 490
+        dummy_date = Date("2022-02-28")
+        expected_value = 490
 
-        actualValue = countLeapYears(dummyDate)
+        actual_value = count_leap_years(dummy_date)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
-        dummyDate = Date("2020-02-29")
-        expectedValue = 489
+        dummy_date = Date("2020-02-29")
+        expected_value = 489
 
-        actualValue = countLeapYears(dummyDate)
+        actual_value = count_leap_years(dummy_date)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
-        dummyDate = Date("2020-03-01")
-        expectedValue = 490
+        dummy_date = Date("2020-03-01")
+        expected_value = 490
 
-        actualValue = countLeapYears(dummyDate)
+        actual_value = count_leap_years(dummy_date)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
 
-class getDefaultDaysInMonthTest(unittest.TestCase):
+class GetDefaultDaysInMonthTest(unittest.TestCase):
     def test_getDefaultDaysInMonth_should_return_expected_days_for_months(self):
-        self.assertEqual(getDefaultDaysInMonth(MONTH.JANUARY), 31)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.FEBRUARY), 28)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.MARCH), 31)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.APRIL), 30)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.MAY), 31)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.JUNE), 30)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.JULY), 31)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.AUGUST), 31)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.SEPTEMBER), 30)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.OCTOBER), 31)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.NOVEMBER), 30)
-        self.assertEqual(getDefaultDaysInMonth(MONTH.DECEMBER), 31)
+        self.assertEqual(get_default_days_in_month(MONTH.JANUARY), 31)
+        self.assertEqual(get_default_days_in_month(MONTH.FEBRUARY), 28)
+        self.assertEqual(get_default_days_in_month(MONTH.MARCH), 31)
+        self.assertEqual(get_default_days_in_month(MONTH.APRIL), 30)
+        self.assertEqual(get_default_days_in_month(MONTH.MAY), 31)
+        self.assertEqual(get_default_days_in_month(MONTH.JUNE), 30)
+        self.assertEqual(get_default_days_in_month(MONTH.JULY), 31)
+        self.assertEqual(get_default_days_in_month(MONTH.AUGUST), 31)
+        self.assertEqual(get_default_days_in_month(MONTH.SEPTEMBER), 30)
+        self.assertEqual(get_default_days_in_month(MONTH.OCTOBER), 31)
+        self.assertEqual(get_default_days_in_month(MONTH.NOVEMBER), 30)
+        self.assertEqual(get_default_days_in_month(MONTH.DECEMBER), 31)
 
 
-class getActualDaysInMonthTest(unittest.TestCase):
+class GetActualDaysInMonthTest(unittest.TestCase):
     def test_getActualDaysInMonth_should_return_expected_days_for_months_for_leap_year(self):
-        dummyYear = 2020
-        self.assertEqual(getActualDaysInMonth(MONTH.JANUARY, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.FEBRUARY, dummyYear), 29)
-        self.assertEqual(getActualDaysInMonth(MONTH.MARCH, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.APRIL, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.MAY, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.JUNE, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.JULY, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.AUGUST, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.SEPTEMBER, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.OCTOBER, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.NOVEMBER, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.DECEMBER, dummyYear), 31)
+        dummy_year = 2020
+        self.assertEqual(get_actual_days_in_month(MONTH.JANUARY, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.FEBRUARY, dummy_year), 29)
+        self.assertEqual(get_actual_days_in_month(MONTH.MARCH, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.APRIL, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.MAY, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.JUNE, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.JULY, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.AUGUST, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.SEPTEMBER, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.OCTOBER, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.NOVEMBER, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.DECEMBER, dummy_year), 31)
 
     def test_getActualDaysInMonth_should_return_expected_days_for_months_for_non_leap_year(self):
-        dummyYear = 2021
-        self.assertEqual(getActualDaysInMonth(MONTH.JANUARY, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.FEBRUARY, dummyYear), 28)
-        self.assertEqual(getActualDaysInMonth(MONTH.MARCH, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.APRIL, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.MAY, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.JUNE, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.JULY, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.AUGUST, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.SEPTEMBER, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.OCTOBER, dummyYear), 31)
-        self.assertEqual(getActualDaysInMonth(MONTH.NOVEMBER, dummyYear), 30)
-        self.assertEqual(getActualDaysInMonth(MONTH.DECEMBER, dummyYear), 31)
+        dummy_year = 2021
+        self.assertEqual(get_actual_days_in_month(MONTH.JANUARY, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.FEBRUARY, dummy_year), 28)
+        self.assertEqual(get_actual_days_in_month(MONTH.MARCH, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.APRIL, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.MAY, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.JUNE, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.JULY, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.AUGUST, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.SEPTEMBER, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.OCTOBER, dummy_year), 31)
+        self.assertEqual(get_actual_days_in_month(MONTH.NOVEMBER, dummy_year), 30)
+        self.assertEqual(get_actual_days_in_month(MONTH.DECEMBER, dummy_year), 31)
 
 
-class numDaysBetweenDatesTest(unittest.TestCase):
+class NumDaysBetweenDatesTest(unittest.TestCase):
     def test_numDaysBetweenDates_should_return_diff_of_days_between_two_dates(self):
-        dummyDaseDate = Date("1752-10-01")
-        dummyActualDate = Date("2385-07-01")
-        expectedValue = 231106
+        dummy_base_date = Date("1752-10-01")
+        dummy_actual_date = Date("2385-07-01")
+        expected_value = 231106
 
-        actualValue = numDaysBetweenDates(dummyDaseDate, dummyActualDate)
+        actual_value = num_days_between_dates(dummy_base_date, dummy_actual_date)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
     def test_numDaysBetweenDates_should_return_diff_of_days_between_two_dates2(self):
-        dummyDaseDate = Date("2474-07-09")
-        dummyActualDate = Date("2700-12-08")
-        expectedValue = 82696
+        dummy_base_date = Date("2474-07-09")
+        dummy_actual_date = Date("2700-12-08")
+        expected_value = 82696
 
-        actualValue = numDaysBetweenDates(dummyDaseDate, dummyActualDate)
+        actual_value = num_days_between_dates(dummy_base_date, dummy_actual_date)
 
-        self.assertEqual(expectedValue, actualValue)
+        self.assertEqual(expected_value, actual_value)
 
 
-class dateValidatorTest(unittest.TestCase):
+class DateValidatorTest(unittest.TestCase):
     def test_dateValidator_should_pass_a_valid_date(self):
-        dummyDate = "2022-02-28"
+        dummy_date = "2022-02-28"
 
-        dateValidator(dummyDate, PIVOT_DATE)  # No error expected
+        date_validator(dummy_date, PIVOT_DATE)  # No error expected
 
     def test_dateValidator_should_throw_error_if_month_not_passed(self):
-        dummyDate = "2022-02"
+        dummy_date = "2022-02"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_month_is_not_numeric(self):
-        dummyDate = "2022-ab-28"
+        dummy_date = "2022-ab-28"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_month_is_not_integer(self):
-        dummyDate = "2022-2.5-28"
+        dummy_date = "2022-2.5-28"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_month_is_not_valid(self):
-        dummyDate = "2022-13-28"
+        dummy_date = "2022-13-28"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_day_is_not_valid(self):
-        dummyDate = "2022-12-32"
+        dummy_date = "2022-12-32"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_day_is_not_valid_for_leap_year(self):
-        dummyDate = "2020-02-30"
+        dummy_date = "2020-02-30"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_day_is_not_valid_for_non_leap_year(self):
-        dummyDate = "2021-02-29"
+        dummy_date = "2021-02-29"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_day_is_not_valid_for_respective_month(self):
-        dummyDate = "2021-04-31"
+        dummy_date = "2021-04-31"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
     def test_dateValidator_should_throw_error_if_date_is_less_than_pivot_date(self):
-        dummyDate = "1752-09-30"
+        dummy_date = "1752-09-30"
 
         with self.assertRaises(InvalidDateFormat):
-            dateValidator(dummyDate, PIVOT_DATE)
+            date_validator(dummy_date, PIVOT_DATE)
 
 
 if __name__ == "__main__":

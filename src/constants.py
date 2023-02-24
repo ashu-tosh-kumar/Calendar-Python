@@ -51,7 +51,7 @@ class Date:
         return self._year
 
     @property
-    def month(self) -> MONTH:
+    def month(self) -> Enum:
         """Returns value of month
         Returns:
             _month: MONTH
@@ -86,7 +86,7 @@ class Date:
         return f"{self.year}-{self.month.value}-{self.day}"
 
 
-# The Britain and the British Empire including the American colonies adopted the Gregorina Calendar on 13-Sept-1752
+# The Britain and the British Empire including the American colonies adopted the Gregorian Calendar on 13-Sept-1752
 # We are following the Gregorian Calendar and hence minimum supported date is 01-Oct-1752
 PIVOT_DATE = Date("1752-10-01")
 PIVOT_DAY = DAY.SUNDAY

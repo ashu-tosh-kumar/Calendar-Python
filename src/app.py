@@ -1,10 +1,11 @@
 import json
 import logging
+from typing import Tuple
 
 from flask import Flask
 
 from src.exceptions import InvalidDateFormat
-from src.model import getDateMatrix
+from src.model import get_date_matrix
 
 logger = logging.getLogger(__name__)
 app = Flask(__name__)
@@ -16,19 +17,19 @@ def home():
 
 
 @app.route("/<date>", methods=["GET"])
-def date(date: str) -> json:  # Format: "YYYY-MM-DD"
+def date(date: str) -> Tuple[str, int]:  # Format: "YYYY-MM-DD"
     """Home route of the flask application
     Parameters:
         date: str
             Date for which calendar is required
     Returns:
-        dateMatrix: tuple(json, int)
+        date_matrix: tuple(json, int)
             Returns the tuple of json response and status code
     """
     logger.info(f"GET call received to get date for: {date}")
     try:
-        dateMatrix = getDateMatrix(date)
-        return json.dumps(dateMatrix), 200
+        date_matrix = get_date_matrix(date)
+        return json.dumps(date_matrix), 200
     except InvalidDateFormat as e:
         logger.info("Date validation failed", exc_info=True)
         return str(e), 400
