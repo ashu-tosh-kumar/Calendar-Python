@@ -1,6 +1,6 @@
 import unittest
 
-from exceptions import InvalidDateFormat
+from src.exceptions import InvalidDateFormat
 
 
 class InvalidDateFormatTest(unittest.TestCase):

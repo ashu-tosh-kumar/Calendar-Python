@@ -2,8 +2,8 @@ import json
 import unittest
 from unittest.mock import patch
 
-from app import app
-from exceptions import InvalidDateFormat
+from src.app import app
+from src.exceptions import InvalidDateFormat
 
 from tests.mocks import FakeResponse
 

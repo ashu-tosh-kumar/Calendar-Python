@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 
-from exceptions import InvalidDateFormat
-from model import getDateMatrix
+from src.exceptions import InvalidDateFormat
+from src.model import getDateMatrix
 
 
 class getDateMatrixTest(unittest.TestCase):

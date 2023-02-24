@@ -3,8 +3,8 @@ import logging
 
 from flask import Flask
 
-from exceptions import InvalidDateFormat
-from model import getDateMatrix
+from src.exceptions import InvalidDateFormat
+from src.model import getDateMatrix
 
 logger = logging.getLogger(__name__)
 app = Flask(__name__)
