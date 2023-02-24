@@ -31,7 +31,7 @@ class MONTH(Enum):
 # Standardized date object used across the application
 class Date:
     def __init__(self, date: str) -> None:
-        """ Constructor for Date class
+        """Constructor for Date class
         Parameters:
             date: str
                 Date ("YYYY-MM-DD") that needs to be represented as a `Date` object
@@ -43,7 +43,7 @@ class Date:
 
     @property
     def year(self) -> int:
-        """ Returns value of year
+        """Returns value of year
         Returns:
             _year: int
                 Integer representation of year of `Date` object
@@ -52,7 +52,7 @@ class Date:
 
     @property
     def month(self) -> MONTH:
-        """ Returns value of month
+        """Returns value of month
         Returns:
             _month: MONTH
                 `MONTH` representation of month of `Date` object
@@ -61,7 +61,7 @@ class Date:
 
     @property
     def day(self) -> int:
-        """ Returns value of day
+        """Returns value of day
         Returns:
             _day: int
                 Integer representation of day of `Date` object
@@ -70,7 +70,7 @@ class Date:
 
     @day.setter
     def day(self, day: int) -> None:
-        """ Allows setting value of day
+        """Allows setting value of day
         Parameters:
             day: int
                 Value of day that needs to be set for `Date` object
@@ -78,7 +78,7 @@ class Date:
         self._day = day
 
     def __str__(self):
-        """ Returns string representation of `Date` object
+        """Returns string representation of `Date` object
         Returns:
             _date: str
                 String representation of `Date` object
@@ -92,12 +92,4 @@ PIVOT_DATE = Date("1752-10-01")
 PIVOT_DAY = DAY.SUNDAY
 
 # Represents all months that have 31 days in a year
-MONTHS_WITH_31_DAYS = {
-    MONTH.JANUARY,
-    MONTH.MARCH,
-    MONTH.MAY,
-    MONTH.JULY,
-    MONTH.AUGUST,
-    MONTH.OCTOBER,
-    MONTH.DECEMBER
-}
+MONTHS_WITH_31_DAYS = {MONTH.JANUARY, MONTH.MARCH, MONTH.MAY, MONTH.JULY, MONTH.AUGUST, MONTH.OCTOBER, MONTH.DECEMBER}

@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 def getDateMatrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
-    """ Computes the date matrix for a given date
+    """Computes the date matrix for a given date
     Parameters:
         date: str
             Date for which calendar is required
@@ -23,18 +23,16 @@ def getDateMatrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
     dateObj = Date(date)  # Convert into application specific Date object
     dateObj.day = 1
     diffDaysFromPivotDate = numDaysBetweenDates(PIVOT_DATE, dateObj)
-    currDay = DAY._value2member_map_[
-        (PIVOT_DAY.value + diffDaysFromPivotDate) % 7]
+    currDay = DAY._value2member_map_[(PIVOT_DAY.value + diffDaysFromPivotDate) % 7]
 
     #   S  M  T   W   T   F   S
-    dateMatrix = [[None]*7 for _ in range(6)]
+    dateMatrix = [[None] * 7 for _ in range(6)]
 
     # Fill the matrix
     # Fill the previous month
     idx = 0
     jdx = currDay.value - 1
-    lastMonthDate = getActualDaysInMonth(
-        MONTH._value2member_map_[dateObj.month.value - 1], dateObj.year)
+    lastMonthDate = getActualDaysInMonth(MONTH._value2member_map_[dateObj.month.value - 1], dateObj.year)
     while jdx >= 0:
         dateMatrix[idx][jdx] = lastMonthDate
         lastMonthDate -= 1

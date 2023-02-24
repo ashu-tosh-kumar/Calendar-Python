@@ -2,8 +2,14 @@ import unittest
 
 from src.constants import MONTH, PIVOT_DATE, Date
 from src.exceptions import InvalidDateFormat
-from src.utils import (countLeapYears, dateValidator, getActualDaysInMonth,
-                   getDefaultDaysInMonth, isLeapYear, numDaysBetweenDates)
+from src.utils import (
+    countLeapYears,
+    dateValidator,
+    getActualDaysInMonth,
+    getDefaultDaysInMonth,
+    isLeapYear,
+    numDaysBetweenDates,
+)
 
 
 class isLeapYearTest(unittest.TestCase):
@@ -163,7 +169,7 @@ class dateValidatorTest(unittest.TestCase):
 
         with self.assertRaises(InvalidDateFormat):
             dateValidator(dummyDate, PIVOT_DATE)
-        
+
     def test_dateValidator_should_throw_error_if_day_is_not_valid_for_leap_year(self):
         dummyDate = "2020-02-30"
 
@@ -187,6 +193,7 @@ class dateValidatorTest(unittest.TestCase):
 
         with self.assertRaises(InvalidDateFormat):
             dateValidator(dummyDate, PIVOT_DATE)
+
 
 if __name__ == "__main__":
     unittest.main()

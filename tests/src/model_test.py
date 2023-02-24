@@ -9,8 +9,7 @@ class getDateMatrixTest(unittest.TestCase):
     @patch("src.model.dateValidator")
     def test_getDateMatrix_should_raise_exception_for_invalid_date(self, stubDateValidator):
         dummyDate = "2022-13-15"  # Invalid month 13
-        stubDateValidator.side_effect = InvalidDateFormat(
-            "unittest-date-validation-exception")
+        stubDateValidator.side_effect = InvalidDateFormat("unittest-date-validation-exception")
 
         with self.assertRaises(InvalidDateFormat):
             getDateMatrix(dummyDate)
@@ -29,7 +28,7 @@ class getDateMatrixTest(unittest.TestCase):
             [13, 14, 15, 16, 17, 18, 19],
             [20, 21, 22, 23, 24, 25, 26],
             [27, 28, 1, 2, 3, 4, 5],
-            [6, 7, 8, 9, 10, 11, 12]
+            [6, 7, 8, 9, 10, 11, 12],
         ]
 
         actualValue = getDateMatrix(dummyDate)
@@ -50,7 +49,7 @@ class getDateMatrixTest(unittest.TestCase):
             [9, 10, 11, 12, 13, 14, 15],
             [16, 17, 18, 19, 20, 21, 22],
             [23, 24, 25, 26, 27, 28, 29],
-            [1, 2, 3, 4, 5, 6, 7]
+            [1, 2, 3, 4, 5, 6, 7],
         ]
 
         actualValue = getDateMatrix(dummyDate)
@@ -71,7 +70,7 @@ class getDateMatrixTest(unittest.TestCase):
             [15, 16, 17, 18, 19, 20, 21],
             [22, 23, 24, 25, 26, 27, 28],
             [29, 30, 31, 1, 2, 3, 4],
-            [5, 6, 7, 8, 9, 10, 11]
+            [5, 6, 7, 8, 9, 10, 11],
         ]
 
         actualValue = getDateMatrix(dummyDate)
@@ -92,7 +91,7 @@ class getDateMatrixTest(unittest.TestCase):
             [14, 15, 16, 17, 18, 19, 20],
             [21, 22, 23, 24, 25, 26, 27],
             [28, 29, 30, 31, 1, 2, 3],
-            [4, 5, 6, 7, 8, 9, 10]
+            [4, 5, 6, 7, 8, 9, 10],
         ]
 
         actualValue = getDateMatrix(dummyDate)

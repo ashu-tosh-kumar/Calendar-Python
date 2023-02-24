@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 def isLeapYear(year: int) -> bool:
-    """ Checks whetehr a year is leap year or not
+    """Checks whetehr a year is leap year or not
     Parameters:
         year: int
             Year that needs to be checked
@@ -34,7 +34,7 @@ def isLeapYear(year: int) -> bool:
 
 
 def countLeapYears(date: Date) -> int:
-    """ Count number of leap years passed until given `date`
+    """Count number of leap years passed until given `date`
 
     if takes current year into consideration if `date` is beyond month of February else not
 
@@ -56,13 +56,12 @@ def countLeapYears(date: Date) -> int:
     numLeapYearsUntilDate -= year // 100
     numLeapYearsUntilDate += year // 400
 
-    logger.debug(
-        f"No. of leap years until date: {date}: {numLeapYearsUntilDate}")
+    logger.debug(f"No. of leap years until date: {date}: {numLeapYearsUntilDate}")
     return numLeapYearsUntilDate
 
 
 def getDefaultDaysInMonth(month: MONTH) -> int:
-    """ Returns no. of default days in a month without considering a leap year
+    """Returns no. of default days in a month without considering a leap year
     Parameters:
         month: MONTH
             month for which actual days is required
@@ -79,7 +78,7 @@ def getDefaultDaysInMonth(month: MONTH) -> int:
 
 
 def getActualDaysInMonth(month: MONTH, year: int) -> int:
-    """ Returns no. of actual days in a month with considering a leap year
+    """Returns no. of actual days in a month with considering a leap year
 
     Makes use of `getDefaultDaysInMonth`
 
@@ -102,7 +101,7 @@ def getActualDaysInMonth(month: MONTH, year: int) -> int:
 
 
 def numDaysBetweenDates(baseDate: Date, actualDate: Date) -> int:
-    """ Returns difference of days between two dates
+    """Returns difference of days between two dates
 
     Makes use of `getDefaultDaysInMonth`, `countLeapYears`
 
@@ -119,7 +118,7 @@ def numDaysBetweenDates(baseDate: Date, actualDate: Date) -> int:
     logger.debug(f"Counting diff of days between: {baseDate} and {actualDate}")
 
     def calculateAbsoluteDays(date: Date) -> int:
-        """ Returns no. of absolute days since begining until `date`
+        """Returns no. of absolute days since begining until `date`
 
         Makes use of `getDefaultDaysInMonth`, `countLeapYears`
 
@@ -140,13 +139,12 @@ def numDaysBetweenDates(baseDate: Date, actualDate: Date) -> int:
     totalDaysBaseDate = calculateAbsoluteDays(baseDate)
     totalDaysActualDate = calculateAbsoluteDays(actualDate)
 
-    logger.debug(
-        f"Diff of days between: {baseDate} and {actualDate} = {totalDaysActualDate - totalDaysBaseDate}")
+    logger.debug(f"Diff of days between: {baseDate} and {actualDate} = {totalDaysActualDate - totalDaysBaseDate}")
     return totalDaysActualDate - totalDaysBaseDate
 
 
 def dateValidator(date: str, pivotDate: Date) -> None:
-    """ Validates a string date to be accepted by the application
+    """Validates a string date to be accepted by the application
 
     Parameters:
         date: str
@@ -161,25 +159,19 @@ def dateValidator(date: str, pivotDate: Date) -> None:
     logger.info(f"Validaing date: {date}")
     try:
         year, month, day = date.split("-")
-    except:
-        logger.info(
-            f"Failed to fetch year, month and/or day information from string: {date}")
-        raise InvalidDateFormat(
-            f"String {date} doesn't contain enough separators to specify year, month and day")
+    except Exception:
+        logger.info(f"Failed to fetch year, month and/or day information from string: {date}")
+        raise InvalidDateFormat(f"String {date} doesn't contain enough separators to specify year, month and day")
 
     try:
         year, month, day = float(year), float(month), float(day)
-    except:
-        logger.info(
-            f"Year and/or month and/or day of date: {date} is/are not numbers")
-        raise InvalidDateFormat(
-            f"String {date} contains non-numeric values for year and/or month and/or day")
+    except Exception:
+        logger.info(f"Year and/or month and/or day of date: {date} is/are not numbers")
+        raise InvalidDateFormat(f"String {date} contains non-numeric values for year and/or month and/or day")
 
     if int(year) != year or int(month) != month or int(day) != day:
-        logger.info(
-            f"Year and/or month and/or day of date: {date} is/are not Integers")
-        raise InvalidDateFormat(
-            f"Year: {year} or month: {month} or day: {day} is/are not integer(s)")
+        logger.info(f"Year and/or month and/or day of date: {date} is/are not Integers")
+        raise InvalidDateFormat(f"Year: {year} or month: {month} or day: {day} is/are not integer(s)")
 
     if month <= 0 or month > 12:
         logger.info(f"Month of date: {date} is not in range [1, 12]")
@@ -192,24 +184,17 @@ def dateValidator(date: str, pivotDate: Date) -> None:
     if month == 2:
         if isLeapYear(year):
             if day > 29:
-                logger.info(
-                    f"Month of date: {date} is not in range [1, 29] for a leap year")
-                raise InvalidDateFormat(
-                    f"Given day: {day} isn't between [1,29] for a leap year")
+                logger.info(f"Month of date: {date} is not in range [1, 29] for a leap year")
+                raise InvalidDateFormat(f"Given day: {day} isn't between [1,29] for a leap year")
         else:
             if day > 28:
-                logger.info(
-                    f"Month of date: {date} is not in range [1, 28] for a non-leap year")
-                raise InvalidDateFormat(
-                    f"Given day: {day} isn't between [1,28] for a non-leap year")
+                logger.info(f"Month of date: {date} is not in range [1, 28] for a non-leap year")
+                raise InvalidDateFormat(f"Given day: {day} isn't between [1,28] for a non-leap year")
     elif MONTH._value2member_map_[month] not in MONTHS_WITH_31_DAYS:
         if day == 31:
             logger.info(f"Month of date: {date} is not in range [1,30]")
-            raise InvalidDateFormat(
-                f"Given day: {day} isn't between [1, 30] for given month: {MONTH._value2member_map_[month].name}")
+            raise InvalidDateFormat(f"Given day: {day} isn't between [1, 30] for given month: {MONTH._value2member_map_[month].name}")
 
     if numDaysBetweenDates(pivotDate, Date(date)) < 0:
-        logger.info(
-            f"Give: {date} is less than the pivot date: {pivotDate} and hence not supported")
-        raise InvalidDateFormat(
-            f"Given date: {date} should be greater or equal to {pivotDate}")
+        logger.info(f"Give: {date} is less than the pivot date: {pivotDate} and hence not supported")
+        raise InvalidDateFormat(f"Given date: {date} should be greater or equal to {pivotDate}")

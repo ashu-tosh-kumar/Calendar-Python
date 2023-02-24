@@ -17,7 +17,7 @@ def home():
 
 @app.route("/<date>", methods=["GET"])
 def date(date: str) -> json:  # Format: "YYYY-MM-DD"
-    """ Home route of the flask application
+    """Home route of the flask application
     Parameters:
         date: str
             Date for which calendar is required
@@ -32,9 +32,8 @@ def date(date: str) -> json:  # Format: "YYYY-MM-DD"
     except InvalidDateFormat as e:
         logger.info("Date validation failed", exc_info=True)
         return str(e), 400
-    except:
-        logger.exception(
-            "Server side error. Please reach out to support team for help")
+    except Exception:
+        logger.exception("Server side error. Please reach out to support team for help")
         return "Server side issue", 500
 
 
