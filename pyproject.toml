@@ -1,0 +1,24 @@
+[tool.black]
+line-length = 160
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+  | venv
+  | .env
+)/
+'''
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: marks integration tests to differentiate from unittests (deselect with '-m \"not integration\"')",
+]
