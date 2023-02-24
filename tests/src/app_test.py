@@ -27,7 +27,7 @@ class TestFlaskApp(unittest.TestCase):
                              actualResponse.status_code)
             self.assertEqual(expectedResponse.data, actualResponse.data)
 
-    @patch("app.getDateMatrix")
+    @patch("src.app.getDateMatrix")
     def test_date_page_should_return_expected_message_for_valid_date(self, stubGetDateMatrix):
         dummyDate = "2022-02-27"
         expectedDateMatrix = b"[[30, 31, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11, 12], [13, 14, 15, 16, 17, 18, 19], [20, 21, 22, 23, 24, 25, 26], [27, 28, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11, 12]]"
@@ -44,7 +44,7 @@ class TestFlaskApp(unittest.TestCase):
                              actualResponse.status_code)
             self.assertEqual(expectedResponse.data, actualResponse.data)
 
-    @patch("app.getDateMatrix")
+    @patch("src.app.getDateMatrix")
     def test_date_page_should_return_400_for_invalid_date(self, stubGetDateMatrix):
         dummyDate = "2022-02-27"
         stubGetDateMatrix.side_effect = InvalidDateFormat(
@@ -61,7 +61,7 @@ class TestFlaskApp(unittest.TestCase):
             self.assertEqual(expectedResponse.data,
                              actualResponse.data.decode())
 
-    @patch("app.getDateMatrix")
+    @patch("src.app.getDateMatrix")
     def test_date_page_should_return_500_for_unexpected_server_side_error(self, stubGetDateMatrix):
         dummyDate = "2022-02-27"
         stubGetDateMatrix.side_effect = Exception(
