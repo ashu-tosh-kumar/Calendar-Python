@@ -1,9 +1,5 @@
-import logging
-
-from src.constants import DAY, MONTH, PIVOT_DATE, PIVOT_DAY, Date
-from src.utils import date_validator, get_actual_days_in_month, num_days_between_dates
-
-logger = logging.getLogger(__name__)
+from src import constants, utils
+from src.initializer import logger
 
 
 def get_date_matrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
@@ -18,12 +14,12 @@ def get_date_matrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
     logger.info(f"Computing date matrix for: {date}")
 
     # Validation on date passed by user
-    date_validator(date, PIVOT_DATE)
+    utils.date_validator(date, constants.PIVOT_DATE)
 
-    date_obj = Date(date)  # Convert into application specific Date object
+    date_obj = constants.Date(date)  # Convert into application specific Date object
     date_obj.day = 1
-    diff_days_from_pivot_date = num_days_between_dates(PIVOT_DATE, date_obj)
-    curr_day = DAY._value2member_map_[(PIVOT_DAY.value + diff_days_from_pivot_date) % 7]
+    diff_days_from_pivot_date = utils.num_days_between_dates(constants.PIVOT_DATE, date_obj)
+    curr_day = constants.DAY._value2member_map_[(constants.PIVOT_DAY.value + diff_days_from_pivot_date) % 7]
 
     #   S  M  T   W   T   F   S
     date_matrix = [[0] * 7 for _ in range(6)]
@@ -32,7 +28,7 @@ def get_date_matrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
     # Fill the previous month
     idx = 0
     jdx = curr_day.value - 1
-    last_month_date = get_actual_days_in_month(MONTH._value2member_map_[date_obj.month.value - 1], date_obj.year)
+    last_month_date = utils.get_actual_days_in_month(constants.MONTH._value2member_map_[date_obj.month.value - 1], date_obj.year)
     while jdx >= 0:
         date_matrix[idx][jdx] = last_month_date
         last_month_date -= 1
@@ -41,7 +37,7 @@ def get_date_matrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
     # Fill the current month
     idx = 0
     jdx = curr_day.value
-    this_month_date = get_actual_days_in_month(date_obj.month, date_obj.year)
+    this_month_date = utils.get_actual_days_in_month(date_obj.month, date_obj.year)
     for day in range(1, this_month_date + 1):
         date_matrix[idx][jdx] = day
         jdx += 1
