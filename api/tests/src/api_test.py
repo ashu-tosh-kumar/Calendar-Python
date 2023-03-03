@@ -2,9 +2,9 @@ import json
 import unittest
 from unittest.mock import patch
 
-from app.src.api import flask_app
-from app.src.exceptions import InvalidDateFormat
-from app.tests.mocks import FakeResponse
+from api.src.api import flask_app
+from api.src.exceptions import InvalidDateFormat
+from api.tests.mocks import FakeResponse
 
 
 class TestFlaskApp(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFlaskApp(unittest.TestCase):
             self.assertEqual(expected_response.status_code, actual_response.status_code)
             self.assertEqual(expected_response.data, actual_response.data)
 
-    @patch("app.src.api.get_date_matrix")
+    @patch("api.src.api.get_date_matrix")
     def test_date_page_should_return_expected_message_for_valid_date(self, stub_get_date_matrix):
         dummy_date = "2022-02-27"
         expected_date_matrix = b"[[30, 31, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11, 12], [13, 14, 15, 16, 17, 18, 19], [20, 21, 22, 23, 24, 25, 26], [27, 28, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11, 12]]"
@@ -46,7 +46,7 @@ class TestFlaskApp(unittest.TestCase):
             self.assertEqual(expected_response.status_code, actual_response.status_code)
             self.assertEqual(expected_response.data, actual_response.data)
 
-    @patch("app.src.api.get_date_matrix")
+    @patch("api.src.api.get_date_matrix")
     def test_date_page_should_return_400_for_invalid_date(self, stub_get_date_matrix):
         dummy_date = "2022-02-27"
         stub_get_date_matrix.get_date_matrix.side_effect = InvalidDateFormat("unittest-invalid-date")
@@ -59,7 +59,7 @@ class TestFlaskApp(unittest.TestCase):
             self.assertEqual(expected_response.status_code, actual_response.status_code)
             self.assertEqual(expected_response.data, actual_response.data.decode())
 
-    @patch("app.src.api.get_date_matrix")
+    @patch("api.src.api.get_date_matrix")
     def test_date_page_should_return_500_for_unexpected_server_side_error(self, stub_get_date_matrix):
         dummy_date = "2022-02-27"
         stub_get_date_matrix.get_date_matrix.side_effect = Exception("unittest-server-side-exception")

@@ -1,7 +1,7 @@
 import json
 
-from app.src import exceptions, get_date_matrix
-from app.src.initializer import flask_app, logger
+from api.src import exceptions, get_date_matrix
+from api.src.initializer import flask_app, logger
 
 
 @flask_app.route("/", methods=["GET"])

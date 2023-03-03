@@ -1,6 +1,6 @@
 import unittest
 
-from app.src.constants import (
+from api.src.constants import (
     DAY,
     MONTH,
     MONTHS_WITH_31_DAYS,

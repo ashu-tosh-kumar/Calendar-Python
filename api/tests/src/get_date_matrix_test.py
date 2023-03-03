@@ -1,12 +1,12 @@
 import unittest
 from unittest.mock import patch
 
-from app.src.exceptions import InvalidDateFormat
-from app.src.get_date_matrix import get_date_matrix
+from api.src.exceptions import InvalidDateFormat
+from api.src.get_date_matrix import get_date_matrix
 
 
 class GetDateMatrixTest(unittest.TestCase):
-    @patch("app.src.get_date_matrix.utils")
+    @patch("api.src.get_date_matrix.utils")
     def test_getDateMatrix_should_raise_exception_for_invalid_date(self, stub_utils):
         dummy_date = "2022-13-15"  # Invalid month 13
         stub_utils.date_validator.side_effect = InvalidDateFormat("unittest-date-validation-exception")
@@ -14,7 +14,7 @@ class GetDateMatrixTest(unittest.TestCase):
         with self.assertRaises(InvalidDateFormat):
             get_date_matrix(dummy_date)
 
-    @patch("app.src.get_date_matrix.utils")
+    @patch("api.src.get_date_matrix.utils")
     def test_getDateMatrix_should_return_expected_date_matrix(self, stub_utils):
         dummy_date = "2022-02-28"
         # The code in get_date_matrix.py makes date as 1, so this value wouldn't be the actual different between dummy_date and PIVOT_DATE
@@ -33,7 +33,7 @@ class GetDateMatrixTest(unittest.TestCase):
 
         self.assertEqual(expected_value, actual_value)
 
-    @patch("app.src.get_date_matrix.utils")
+    @patch("api.src.get_date_matrix.utils")
     def test_getDateMatrix_should_return_expected_date_matrix_for_leap_month(self, stub_utils):
         dummy_date = "2020-02-28"
         # The code in get_date_matrix.py makes date as 1, so this value wouldn't be the actual different between dummy_date and PIVOT_DATE
@@ -52,7 +52,7 @@ class GetDateMatrixTest(unittest.TestCase):
 
         self.assertEqual(expected_value, actual_value)
 
-    @patch("app.src.get_date_matrix.utils")
+    @patch("api.src.get_date_matrix.utils")
     def test_getDateMatrix_should_return_expected_date_matrix_for_non_leap_month(
         self,
         stub_utils,
@@ -74,7 +74,7 @@ class GetDateMatrixTest(unittest.TestCase):
 
         self.assertEqual(expected_value, actual_value)
 
-    @patch("app.src.get_date_matrix.utils")
+    @patch("api.src.get_date_matrix.utils")
     def test_getDateMatrix_should_return_expected_date_matrix_for_a_random_date(self, stub_utils):
         dummy_date = "2385-07-07"
         # The code in get_date_matrix.py makes date as 1, so this value wouldn't be the actual different between dummy_date and PIVOT_DATE

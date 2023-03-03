@@ -16,13 +16,12 @@ RUN pip install wheel
 RUN pip install --default-timeout=100 --no-cache-dir -r requirements.txt
 
 # Copy code
-COPY ./app/src /calendar-python/app/src
-COPY ./app/tests /calendar-python/app/tests
+COPY ./api/ /calendar-python/api
 COPY ./pyproject.toml /calendar-python/pyproject.toml
 COPY ./tox.ini /calendar-python/tox.ini
 
 # Provide access to script files
-RUN chmod -R 777 app/src/scripts
+RUN chmod -R 777 api/src/scripts
 
 # Setup the application
 EXPOSE 8000
