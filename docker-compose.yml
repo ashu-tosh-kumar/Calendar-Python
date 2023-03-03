@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  calendar-python:
+    container_name: calendar-python
+    build:
+      context: .
+    volumes:
+      - "./:/calendar-python/"
+    ports:
+      - "0.0.0.0:8000:8000"
+    entrypoint: [ "bash" ]
+    command: [ "api/src/scripts/run_api.sh" ]
+    restart: unless-stopped
