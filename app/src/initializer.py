@@ -11,4 +11,4 @@ logger = logging.getLogger(__name__)
 
 # ----------------------------------------------------------
 # Flask application setup
-app = Flask(__name__)
+flask_app = Flask(__name__)

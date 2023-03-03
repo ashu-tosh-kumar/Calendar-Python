@@ -9,5 +9,5 @@ services:
     ports:
       - "0.0.0.0:8000:8000"
     entrypoint: [ "bash" ]
-    command: [ "src/scripts/run_api.sh" ]
+    command: [ "app/src/scripts/run_api.sh" ]
     restart: unless-stopped

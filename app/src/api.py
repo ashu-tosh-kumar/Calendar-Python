@@ -1,10 +1,10 @@
 import json
 
-from src import exceptions, get_date_matrix
-from src.initializer import app, logger
+from app.src import exceptions, get_date_matrix
+from app.src.initializer import flask_app, logger
 
 
-@app.route("/", methods=["GET"])
+@flask_app.route("/", methods=["GET"])
 def home() -> tuple[str, int]:
     """Home end point
 
@@ -16,7 +16,7 @@ def home() -> tuple[str, int]:
     return "Welcome to Calendar App. Please visit url: 'hostname:port/date' to try it.", 200
 
 
-@app.route("/health", methods=["GET"])
+@flask_app.route("/health", methods=["GET"])
 def health() -> tuple[str, int]:
     """Health end point
 
@@ -28,7 +28,7 @@ def health() -> tuple[str, int]:
     return "Calendar App alive.", 200
 
 
-@app.route("/<date>", methods=["GET"])
+@flask_app.route("/date/<date>", methods=["GET"])
 def date(date: str) -> tuple[str, int]:
     """Home route of the flask application
 
