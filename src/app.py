@@ -1,6 +1,6 @@
 import json
 
-from src import exceptions, model
+from src import exceptions, get_date_matrix
 from src.initializer import app, logger
 
 
@@ -26,7 +26,7 @@ def date(date: str) -> tuple[str, int]:  # Format: "YYYY-MM-DD"
     """
     logger.info(f"GET call received to get date for: {date}")
     try:
-        date_matrix = model.get_date_matrix(date)
+        date_matrix = get_date_matrix.get_date_matrix(date)
         return json.dumps(date_matrix), 200
     except exceptions.InvalidDateFormat as e:
         logger.info("Date validation failed", exc_info=True)
