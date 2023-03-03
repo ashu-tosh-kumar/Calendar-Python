@@ -3,6 +3,8 @@ from enum import Enum
 
 # Represents day of a week
 class DAY(Enum):
+    """Enum representing day of the week"""
+
     SUNDAY = 0
     MONDAY = 1
     TUESDAY = 2
@@ -14,6 +16,8 @@ class DAY(Enum):
 
 # represents a month in a year
 class MONTH(Enum):
+    """Enum representing month of the year"""
+
     JANUARY = 1
     FEBRUARY = 2
     MARCH = 3
@@ -30,11 +34,13 @@ class MONTH(Enum):
 
 # Standardized date object used across the application
 class Date:
+    """Class representing the date object"""
+
     def __init__(self, date: str) -> None:
-        """Constructor for Date class
-        Parameters:
-            date: str
-                Date ("YYYY-MM-DD") that needs to be represented as a `Date` object
+        """Initializer for `Date` class
+
+        Args:
+            date (str): ("YYYY-MM-DD") that needs to be represented as a `Date` object
         """
         year, month, day = map(int, date.split("-"))
         self._year = year
@@ -44,44 +50,44 @@ class Date:
     @property
     def year(self) -> int:
         """Returns value of year
+
         Returns:
-            _year: int
-                Integer representation of year of `Date` object
+            int: Integer representation of year of `Date` object
         """
         return self._year
 
     @property
     def month(self) -> Enum:
         """Returns value of month
+
         Returns:
-            _month: MONTH
-                `MONTH` representation of month of `Date` object
+            Enum: `MONTH` representation of month of `Date` object
         """
         return self._month
 
     @property
     def day(self) -> int:
         """Returns value of day
+
         Returns:
-            _day: int
-                Integer representation of day of `Date` object
+            int: Integer representation of day of `Date` object
         """
         return self._day
 
     @day.setter
     def day(self, day: int) -> None:
         """Allows setting value of day
-        Parameters:
-            day: int
-                Value of day that needs to be set for `Date` object
+
+        Args:
+            day (int): Value of day that needs to be set for `Date` object
         """
         self._day = day
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns string representation of `Date` object
+
         Returns:
-            _date: str
-                String representation of `Date` object
+            str: String representation of `Date` object
         """
         return f"{self.year}-{self.month.value}-{self.day}"
 

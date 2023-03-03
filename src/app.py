@@ -5,26 +5,41 @@ from src.initializer import app, logger
 
 
 @app.route("/", methods=["GET"])
-def home():
-    return "Welcome to Calendar App. Please visit url: 'hostname:port/date' to try it."
+def home() -> tuple[str, int]:
+    """Home end point
+
+    Returns:
+        tuple[str, int]: Returns string message and status code
+    """
+    logger.debug("Home GET end point called")
+
+    return "Welcome to Calendar App. Please visit url: 'hostname:port/date' to try it.", 200
 
 
 @app.route("/health", methods=["GET"])
-def health():
-    return "Calendar App alive."
+def health() -> tuple[str, int]:
+    """Health end point
+
+    Returns:
+        tuple[str, int]: Returns string message and status code
+    """
+    logger.debug("Health GET end point called")
+
+    return "Calendar App alive.", 200
 
 
 @app.route("/<date>", methods=["GET"])
-def date(date: str) -> tuple[str, int]:  # Format: "YYYY-MM-DD"
+def date(date: str) -> tuple[str, int]:
     """Home route of the flask application
-    Parameters:
-        date: str
-            Date for which calendar is required
+
+    Args:
+        date (str): Date for which calendar is required
+
     Returns:
-        date_matrix: tuple(json, int)
-            Returns the tuple of json response and status code
+        tuple[str, int]: Returns the tuple of json response and status code
     """
     logger.info(f"GET call received to get date for: {date}")
+
     try:
         date_matrix = get_date_matrix.get_date_matrix(date)
         return json.dumps(date_matrix), 200

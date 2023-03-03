@@ -1,19 +1,17 @@
-import logging
 from enum import Enum
 
 from src import constants, exceptions
-
-logger = logging.getLogger(__name__)
+from src.initializer import logger
 
 
 def is_leap_year(year: int) -> bool:
     """Checks whether a year is leap year or not
-    Parameters:
-        year: int
-            Year that needs to be checked
+
+    Args:
+        year (int): Year that needs to be checked
+
     Returns:
-        is_leap_year: bool
-            Boolean flag as `True` if given `year` is a leap year else `False`
+        bool: Boolean flag as `True` if given `year` is a leap year else `False`
     """
     logger.debug(f"Checking year: {year} for leap year")
 
@@ -36,16 +34,16 @@ def is_leap_year(year: int) -> bool:
 def count_leap_years(date: constants.Date) -> int:
     """Count number of leap years passed until given `date`
 
-    if takes current year into consideration if `date` is beyond month of February else not
+    - It takes current year into consideration if `date` is beyond month of February
 
-    Parameters:
-        date: constants.Date
-            Date until which we need to calculate no. of leap years
+    Args:
+        date (constants.Date): Date until which we need to calculate no. of leap years
+
     Returns:
-        num_leap_years_until_date: int
-            No. of leap years passed until the `date`
+        int: No. of leap years passed until the `date`
     """
     logger.debug(f"Counting no. of leap years until date: {date}")
+
     num_leap_years_until_date = 0
     year = date.year
 
@@ -62,13 +60,15 @@ def count_leap_years(date: constants.Date) -> int:
 
 def get_default_days_in_month(month: Enum) -> int:
     """Returns no. of default days in a month without considering a leap year
-    Parameters:
-        month: Enum
-            month for which actual days is required
+
+    Args:
+        month (Enum): month for which actual days is required
+
     Returns:
-        numDays : int
-            No. of days in given month `month`
+        int: No. of days in given month `month`
     """
+    logger.debug(f"Getting default days for month: {month}")
+
     if month in constants.MONTHS_WITH_31_DAYS:
         return 31
     elif month is constants.MONTH.FEBRUARY:
@@ -80,17 +80,17 @@ def get_default_days_in_month(month: Enum) -> int:
 def get_actual_days_in_month(month: Enum, year: int) -> int:
     """Returns no. of actual days in a month with considering a leap year
 
-    Makes use of `getDefaultDaysInMonth`
+    - Makes use of `getDefaultDaysInMonth`
 
-    Parameters:
-        month: Enum
-            month for which actual days is required
-        year: int
-            Year in which no. of days is required for `month`
+    Args:
+        month (Enum): month for which actual days is required
+        year (int): Year in which no. of days is required for `month`
+
     Returns:
-        numDays : int
-            No. of days in given month `month`
+        int: No. of days in given month `month`
     """
+    logger.debug(f"Getting actual days for month: {month} for year: {year}")
+
     if month is constants.MONTH.FEBRUARY:
         if is_leap_year(year):
             return 29
@@ -103,58 +103,57 @@ def get_actual_days_in_month(month: Enum, year: int) -> int:
 def num_days_between_dates(base_date: constants.Date, actual_date: constants.Date) -> int:
     """Returns difference of days between two dates
 
-    Makes use of `getDefaultDaysInMonth`, `countLeapYears`
+    - Makes use of `getDefaultDaysInMonth`, `countLeapYears`
 
-    Parameters:
-        base_date: constants.Date
-            Base date from which difference needs to be calculated
+    Args:
+        base_date (constants.Date): Base date from which difference needs to be calculated
+        actual_date (constants.Date): Actual date upto which difference needs to be calculated
 
-        actual_date: constants.Date
-            Actual date upto which difference needs to be calculated
     Returns:
-        numDays : int
-            Difference of days between `total_days_actual_date` `total_days_base_date`
+        int: Difference of days between `total_days_actual_date` `total_days_base_date`
     """
     logger.debug(f"Counting diff of days between: {base_date} and {actual_date}")
 
     def calculate_absolute_days(date: constants.Date) -> int:
         """Returns no. of absolute days since beginning until `date`
 
-        Makes use of `getDefaultDaysInMonth`, `countLeapYears`
+        - Makes use of `getDefaultDaysInMonth`, `countLeapYears`
 
-        Parameters:
-            date: constants.Date
-                Date for which absolute no. of days needs to be calculated
+        Args:
+            date (constants.Date): Date for which absolute no. of days needs to be calculated
+
         Returns:
-            numDays : int
-                No. of days since beginning until `date`
+            int: No. of days since beginning until `date`
         """
+        logger.debug(f"Calculating absolute number of days from beginning for date: {date}")
+
         total_days = date.year * 365 + date.day
         for i in range(1, date.month.value):
             total_days += get_default_days_in_month(constants.MONTH._value2member_map_[i])
 
         total_days += count_leap_years(date)
+        logger.debug(f"Absolute number of days from beginning for date: {date} calculated = {total_days}")
+
         return total_days
 
     total_days_base_date = calculate_absolute_days(base_date)
     total_days_actual_date = calculate_absolute_days(actual_date)
+    logger.debug(
+        f"Diff of days between: {base_date} and {actual_date} = {total_days_actual_date} - {total_days_base_date} = {total_days_actual_date - total_days_base_date}"
+    )
 
-    logger.debug(f"Diff of days between: {base_date} and {actual_date} = {total_days_actual_date - total_days_base_date}")
     return total_days_actual_date - total_days_base_date
 
 
 def date_validator(date: str, pivot_date: constants.Date) -> None:
     """Validates a string date to be accepted by the application
 
-    Parameters:
-        date: str
-            Date that needs to be validated
+    Args:
+        date (str): Date that needs to be validated
+        pivot_date (constants.Date): Minimum possible date supported by the application
 
-        pivot_date: constants.Date
-            Minimum possible date supported by the application
     Raises:
-        exceptions.InvalidDateFormat
-            If the passed `date` fails the validations test(s)
+        exceptions.InvalidDateFormat: If the passed `date` fails the validations test(s)
     """
     logger.info(f"Validating date: {date}")
     try:

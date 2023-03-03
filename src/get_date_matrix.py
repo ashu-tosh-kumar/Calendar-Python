@@ -2,14 +2,17 @@ from src import constants, utils
 from src.initializer import logger
 
 
-def get_date_matrix(date: str) -> list[list]:  # Format: "YYYY-MM-DD"
+def get_date_matrix(date: str) -> list[list]:
     """Computes the date matrix for a given date
-    Parameters:
-        date: str
-            Date for which calendar is required
+
+    NOTE: We can use `dateutil` library to parse the date efficiently but the objective
+    here is to use minimal libraries and showcase the project
+
+    Args:
+        date (str): Date (Format: "YYYY-MM-DD") for which calendar is required
+
     Returns:
-        date_matrix: list[list]
-            Returns a list of list representing 7*6 calendar for the month as per `date`
+        list[list]: Returns a list of list representing 7*6 calendar for the month as per `date`
     """
     logger.info(f"Computing date matrix for: {date}")
 
