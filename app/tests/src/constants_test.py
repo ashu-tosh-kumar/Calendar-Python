@@ -1,6 +1,13 @@
 import unittest
 
-from src.constants import DAY, MONTH, MONTHS_WITH_31_DAYS, PIVOT_DATE, PIVOT_DAY, Date
+from app.src.constants import (
+    DAY,
+    MONTH,
+    MONTHS_WITH_31_DAYS,
+    PIVOT_DATE,
+    PIVOT_DAY,
+    Date,
+)
 
 
 class ConstantsTest(unittest.TestCase):
