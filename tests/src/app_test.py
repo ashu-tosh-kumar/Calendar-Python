@@ -22,6 +22,16 @@ class TestFlaskApp(unittest.TestCase):
             self.assertEqual(expected_response.status_code, actual_response.status_code)
             self.assertEqual(expected_response.data, actual_response.data)
 
+    def test_health_page_should_return_expected_message(self):
+        with self._app.test_client() as test_client:
+            expected_response = FakeResponse(data=b"Calendar App alive.", status_code=200)
+
+            # Hitting home page
+            actual_response = test_client.get("/health")
+
+            self.assertEqual(expected_response.status_code, actual_response.status_code)
+            self.assertEqual(expected_response.data, actual_response.data)
+
     @patch("src.app.get_date_matrix")
     def test_date_page_should_return_expected_message_for_valid_date(self, stub_get_date_matrix):
         dummy_date = "2022-02-27"
